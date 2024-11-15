@@ -9,6 +9,8 @@ interface User extends Document {
     passwordUpdatedAt: Date;
 }
 
+export { User }
+
 const userSchema = new Schema<User>({
     name: {
         type: String,
