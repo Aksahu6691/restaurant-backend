@@ -2,7 +2,7 @@ import express, { json, NextFunction, Request, Response, urlencoded } from 'expr
 import * as dotenv from 'dotenv';
 import path from 'path';
 import connectDB from './config/db';
-import { dishRoutes, testimonialRoutes } from './api';
+import { dishRoutes, testimonialRoutes, userRoutes } from './api';
 import cors from 'cors';
 
 const app = express();
@@ -16,6 +16,7 @@ app.use(express.static(path.join(__dirname, '../public'))); // enable static fol
 // Mount all routes
 app.use('/api/dish', dishRoutes);
 app.use('/api/testimonial', testimonialRoutes);
+app.use('/api/user', userRoutes);
 
 // If not found api then give message
 app.all('*', (req: Request, res: Response, next: NextFunction) => {

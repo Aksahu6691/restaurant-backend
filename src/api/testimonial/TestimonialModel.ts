@@ -1,6 +1,5 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
-// TypeScript interface for the Dish model
 interface MyTestimonial extends Document {
     name: string;
     image: string;
@@ -27,5 +26,4 @@ const testimonialSchema = new Schema<MyTestimonial>({
     },
 });
 
-// Create and export the Mongoose model
 export default mongoose.model<MyTestimonial>('Testimonials', testimonialSchema);
