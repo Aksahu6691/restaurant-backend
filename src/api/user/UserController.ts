@@ -42,7 +42,7 @@ export const addUser: RequestHandler = async (req: Request, res: Response) => {
 export const getUser: RequestHandler = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
-        const user = id ? await UserModel.findById(id) : await UserModel.findById(id);
+        const user = id ? await UserModel.findById(id) : await UserModel.find();
         if (!user) {
             res.status(404).json({ message: 'User not found' });
             return;
