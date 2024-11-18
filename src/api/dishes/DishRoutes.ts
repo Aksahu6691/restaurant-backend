@@ -6,7 +6,7 @@ import { protect } from "../../middleware/authentication";
 const dishRoutes = express.Router();
 
 dishRoutes.post('/add', protect, upload.single('image'), addDish)
-    .get('/get/:id?', protect, getDishes)
+    .get('/get/:id?', getDishes)
     // .put('/update/:id', updateDish)
     .delete('/delete/:id', protect, deleteDish);
 

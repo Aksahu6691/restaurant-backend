@@ -1,43 +1,22 @@
-import express, { json, NextFunction, Request, Response, urlencoded } from 'express';
-import * as dotenv from 'dotenv';
-import path from 'path';
-import connectDB from './config/db';
-import { dishRoutes, testimonialRoutes, userRoutes } from './api';
-import cors from 'cors';
+import 'reflect-metadata';
+import log from './utils/logger';
+import env from './config/environment.config';
+import { AppDataSource } from './config/database.config';
+import app from './app';
 
-const app = express();
-dotenv.config();
+AppDataSource.initialize()
+    .then(() => {
+        log.info('Data Base has been initialized!');
 
-// CORS options
-// const corsOptions = {
-//     origin: 'http://localhost:5500',
-//     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-//     credentials: true,
-// };
-
-app.use(cors())
-app.use(json());
-app.use(urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, '../public'))); // enable static folder
-
-// Mount all routes
-app.use('/api/dish', dishRoutes);
-app.use('/api/testimonial', testimonialRoutes);
-app.use('/api/user', userRoutes);
-
-// If not found api then give message
-app.all('*', (req: Request, res: Response, next: NextFunction) => {
-    next(`Can't find ${req.originalUrl} on the server`);
-});
-
-// Error Handle
-process.on("uncaughtException", (err) => {
-    console.error(err.name, err.message);
-    console.error("Uncaught Exception occurred! Shutting down...");
-    process.exit(1);
-});
-
-app.listen(process.env.PORT, () => {
-    connectDB();
-    console.log(`listening on port ${process.env.PORT}`);
-});
+        app.listen(env.app.port, () => {
+            log.info(`Server is running on port: ${env.app.port}`);
+        });
+    })
+    .catch((err) => {
+        log.error(err)
+        log.error(
+            'Error during Data Source initialization:',
+            (err as Error)?.message
+        );
+        process.exit(1);
+    });
