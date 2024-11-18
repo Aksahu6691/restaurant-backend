@@ -8,6 +8,13 @@ import cors from 'cors';
 const app = express();
 dotenv.config();
 
+// CORS options
+// const corsOptions = {
+//     origin: 'http://localhost:5500',
+//     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//     credentials: true,
+// };
+
 app.use(cors())
 app.use(json());
 app.use(urlencoded({ extended: true }));

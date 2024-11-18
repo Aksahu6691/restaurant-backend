@@ -31,7 +31,7 @@ export const userLogin: RequestHandler = async (req: Request, res: Response, nex
         const token = jwt.sign(
             { id: user._id },
             process.env.SECRETE_KEY as string,
-            { expiresIn: '1h' }
+            { expiresIn: 1 }
         );
 
         // 5. Return success response with the token
