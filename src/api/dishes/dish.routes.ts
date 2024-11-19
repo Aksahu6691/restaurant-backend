@@ -5,8 +5,8 @@ import { addDish, deleteDish, getDishes } from "./dish.controller";
 
 const dishRoutes = express.Router();
 
-dishRoutes.post('/add', upload.single('image'), addDish)
+dishRoutes.post('/add', protect, upload.single('image'), addDish)
     .get('/get/:id?', getDishes)
-    .delete('/delete/:id', deleteDish);
+    .delete('/delete/:id', protect, deleteDish);
 
 export default dishRoutes;

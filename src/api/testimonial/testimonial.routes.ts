@@ -5,8 +5,8 @@ import { addTestimonial, deleteTestimonial, getTestimonial } from "./testimonial
 
 const testimonialRoutes = express.Router();
 
-testimonialRoutes.post('/add', upload.single('image'), addTestimonial)
+testimonialRoutes.post('/add', protect, upload.single('image'), addTestimonial)
     .get('/get/:id?', getTestimonial)
-    .delete('/delete/:id', deleteTestimonial);
+    .delete('/delete/:id', protect, deleteTestimonial);
 
 export default testimonialRoutes;

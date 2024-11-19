@@ -4,6 +4,7 @@ dotenv.config();
 export default {
     app: {
         port: Number(process.env.APP_PORT) || 8080,
+        secreteKey: process.env.SECRETE_KEY
     },
     db: {
         type: process.env.DB_TYPE,
