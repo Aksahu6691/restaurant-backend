@@ -1,6 +1,6 @@
-import dishRoutes from "./dishes/DishRoutes";
-import testimonialRoutes from "./testimonial/TestimonialRoutes";
-import userRoutes from "./user/UserRoutes";
+import dishRoutes from "./dishes/dish.routes";
+import testimonialRoutes from "./testimonial/testimonial.routes";
+import userRoutes from "./user/user.routes";
 
 export {
     dishRoutes,

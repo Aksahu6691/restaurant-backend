@@ -1,7 +1,10 @@
 import { Request, Response, NextFunction, RequestHandler } from 'express';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import UserModel from './UserModel';
+import { AppDataSource } from "../../config/database.config";
+import { User } from './user.model';
+
+const userRepository = AppDataSource.getRepository(User);
 
 export const userLogin: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -14,7 +17,7 @@ export const userLogin: RequestHandler = async (req: Request, res: Response, nex
         }
 
         // 2. Check if user exists
-        const user = await UserModel.findOne({ email }).select('+password');
+        const user = await userRepository.findOne({ where: { email } });
         if (!user) {
             res.status(401).json({ message: 'Invalid email or password' });
             return;
@@ -29,9 +32,9 @@ export const userLogin: RequestHandler = async (req: Request, res: Response, nex
 
         // 4. Generate a JWT token
         const token = jwt.sign(
-            { id: user._id },
+            { id: user.id },
             process.env.SECRETE_KEY as string,
-            { expiresIn: 1 }
+            { expiresIn: '1h' }
         );
 
         // 5. Return success response with the token
@@ -39,7 +42,7 @@ export const userLogin: RequestHandler = async (req: Request, res: Response, nex
             message: 'Login successful',
             token,
             user: {
-                id: user._id,
+                id: user.id,
                 name: user.name,
                 email: user.email
             }

@@ -11,5 +11,5 @@ export const AppDataSource = new DataSource({
     useUnifiedTopology: true,
     logging: isLocal ? 'all' : ['error', 'warn'],
     entities: [isLocal ? 'src/**/*.model.ts' : 'build/**/*.model.js'],
-    synchronize: true, // Set to false in production
+    synchronize: isLocal, // Set to false in production
 })
