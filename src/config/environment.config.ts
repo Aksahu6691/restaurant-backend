@@ -19,5 +19,8 @@ export default {
         apiKey: process.env.SENDGRID_API_KEY,
         fromEmail: process.env.FROM_EMAIL,
         sendGridTemId: process.env.SENDGRID_TEM_ID,
+    },
+    auth: {
+        authDomain: process.env.AUTH0_DOMAIN,
     }
 };  
