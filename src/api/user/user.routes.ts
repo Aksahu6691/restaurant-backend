@@ -2,7 +2,6 @@ import express from 'express';
 import { protect } from '../../middleware/authentication';
 import { addUser, deleteUser, getUser, updateUser } from './user.controller';
 import { userLogin } from './user.creadential';
-import checkAuth from '../../middleware/checkAuth';
 
 const userRoutes = express.Router();
 

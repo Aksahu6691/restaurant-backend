@@ -22,5 +22,6 @@ export default {
     },
     auth: {
         authDomain: process.env.AUTH0_DOMAIN,
+        authSecreteKey: process.env.AUTH0_SECRETE_KEY,
     }
 };  

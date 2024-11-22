@@ -3,6 +3,7 @@ import { upload } from "../../utils/fileUpload";
 import { protect } from "../../middleware/authentication";
 import { addDish, deleteDish, getDishes } from "./dish.controller";
 import checkAuth from "../../middleware/checkAuth";
+import checkAuth_old from "../../middleware/checkAuth_old";
 
 const dishRoutes = express.Router();
 
